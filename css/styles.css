@@ -117,6 +117,9 @@ button {
   line-height: 1.5;
   letter-spacing: 0.02em;
   color: var(--title-color);
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .menu-link:hover,
@@ -149,6 +152,9 @@ button {
   font-style: normal;
   color: var(--text-color);
   line-height: 24px;
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-mail:hover,
@@ -197,6 +203,9 @@ button {
   color: var(--main-title-color);
   background-color: var(--second-accent-color);
   box-shadow: 0px 4px 4px 0px #00000026;
+  transition-property: background-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-btn:hover,
@@ -331,6 +340,9 @@ button {
   fill: var(--footer-filter-color);
   background-color: var(--second-accent-color);
   border-radius: 50%;
+  transition-property: background-color, fill;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .socials-link:hover,
 .socials-link:focus {
@@ -360,6 +372,9 @@ button {
   border-radius: 4px;
   color: var(--second-accent-color);
   background: var(--footer-filter-color);
+  transition-property: background, color, box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .btn:not(:last-child) {
   margin-right: 24px;
@@ -386,10 +401,43 @@ button {
   flex-direction: column;
   flex-basis: calc((100% - 48px) / 3);
 }
-
+.box {
+  position: relative;
+  overflow: hidden;
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+  transition-property: transform;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--second-accent-color);
+}
+.overlay > p {
+  color: var(--footer-filter-color);
+  padding-top: 40px;
+  padding-right: 32px;
+  padding-left: 32px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+.example:hover .overlay,
+.example:focus .overlay {
+  transform: translateY(0);
+}
 .example {
   display: block;
   outline: transparent;
+  transition-property: box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .example:hover,
 .example:focus {
@@ -424,15 +472,20 @@ button {
   border-radius: 4px;
   border: 1px solid #8e8f99;
   outline: transparent;
+  transition-property: border, fill;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .custom-icon {
   fill: #8e8f99;
+  transition-property: fill;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .custom-link:hover,
 .custom-link:focus {
   border: 1px solid var(--accent-color);
-  /* fill: var(--accent-color); */
 }
 
 .custom-link:hover .custom-icon,
@@ -491,6 +544,9 @@ button {
   fill: var(--footer-filter-color);
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+  transition-property: background-color, fill;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .ftr-link:hover,
 .ftr-link:focus {
@@ -503,3 +559,57 @@ button {
 }
 
 /* aria-label */
+
+/* Modal window */
+.backdrop {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(46, 47, 66, 0.4);
+  opacity: 1;
+  visibility: visible;
+  pointer-events: initial;
+  transition: opacity 500ms ease-in-out 500ms,
+    visibility 500ms ease-in-out 500ms;
+}
+.backdrop.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.modal {
+  position: absolute;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+  top: 50%;
+  left: 50%;
+  width: 408px;
+  height: 576px;
+  background-color: #fcfcfc;
+  box-shadow: 0px 2px 1px 0px #00000033, 0px 1px 3px 0px #0000001f,
+    0px 1px 1px 0px #00000024;
+  border-radius: 4px;
+  transition: transform 500ms ease-in-out;
+}
+.backdrop.is-hidden .modal {
+  transform: translateX(-50%) translateY(-50%) scale(0);
+}
+.modal-btn {
+  position: absolute;
+  transform: translateX(-100%) translateY(100%);
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  background-color: #e7e9fc;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+.modal-icon {
+  fill: #2e2f42;
+}
